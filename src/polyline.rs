@@ -1,4 +1,3 @@
-use crate::constants;
 use cgmath::{EuclideanSpace, InnerSpace, Point3, Vector3, Zero};
 use noise::{NoiseFn, Perlin};
 use std::cmp::max;
@@ -73,7 +72,7 @@ impl Segment {
         let mut tD = D; // tc = tN / tD, default tD = D >= 0
 
         // compute the line parameters of the two closest points
-        if D < constants::EPSILON {
+        if D < 0.001 {
             // the lines are almost parallel
             sN = 0.0; // force using point P0 on segment self
             sD = 1.0; // to prevent possible division by 0.0 later
@@ -122,13 +121,13 @@ impl Segment {
             }
         }
         // finally do the division to get sc and tc
-        sc = if sN.abs() < constants::EPSILON {
+        sc = if sN.abs() < 0.001 {
             0.0
         } else {
             sN / sD
         };
 
-        tc = if tN.abs() < constants::EPSILON {
+        tc = if tN.abs() < 0.001 {
             0.0
         } else {
             tN / tD
