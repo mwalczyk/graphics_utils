@@ -1,8 +1,11 @@
 use cgmath::{Vector2, Vector3, Zero};
 use gl;
 use gl::types::*;
+
+use std::collections::HashMap;
 use std::mem;
 
+#[derive(Debug, PartialEq, Eq, Hash)]
 enum Attribute {
     POSITIONS,
     COLORS,
